@@ -1,0 +1,24 @@
+ARG BALENA_ARCH=%%BALENA_ARCH%%
+FROM balenalib/${BALENA_ARCH}-alpine-golang:1.18-3.15-build AS gobuild
+
+WORKDIR /go/src
+
+ARG VERSION=1.26.1
+
+RUN go install tailscale.com/cmd/tailscale@v${VERSION} && \
+    go install tailscale.com/cmd/tailscaled@v${VERSION}
+
+FROM balenalib/${BALENA_ARCH}-alpine:3.15-run
+
+# hadolint ignore=DL3018
+RUN apk --no-cache add tini iptables
+
+COPY --from=gobuild /go/bin /usr/bin
+COPY entrypoint.sh /init
+
+RUN chmod +x /init
+
+# ENV ADVERTISE_TAGS "tag:docker,tag:balena"
+ENV ADVERTISE_ROUTES 10.0.0.0/24,192.168.1.0/24
+
+ENTRYPOINT ["/sbin/tini", "--", "/init"]

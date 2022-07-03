@@ -1,0 +1,22 @@
+name: balena
+
+on:
+  pull_request:
+    types: [opened, synchronize, closed]
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-20.04
+    strategy:
+      fail-fast: true
+      matrix:
+        fleet: [gh_klutchell/tailscale-aarch64, gh_klutchell/tailscale-amd64, gh_klutchell/tailscale-armv7hf]
+
+    steps:
+      - uses: actions/checkout@v3
+      - uses: balena-io/deploy-to-balena-action@v0.11.0
+        with:
+          balena_token: ${{ secrets.BALENA_API_KEY }}
+          fleet: ${{ matrix.fleet }}

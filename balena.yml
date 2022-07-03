@@ -1,0 +1,23 @@
+name: tailscale
+description: Run a Tailscale subnet router on balena!
+version: 1.26.1
+type: sw.application
+assets:
+  repository:
+    type: blob.asset
+    data:
+      url: 'https://github.com/klutchell/balena-tailscale'
+  logo:
+    type: blob.asset
+    data:
+      url: https://raw.githubusercontent.com/klutchell/balena-tailscale/main/logo.png
+data:
+  applicationEnvironmentVariables:
+    - TAILSCALE_AUTHKEY: changeme
+  defaultDeviceType: raspberrypi3
+  supportedDeviceTypes:
+    - raspberrypi3
+    - raspberrypi3-64
+    - raspberrypi4-64
+    - fincm3
+    - intel-nuc
