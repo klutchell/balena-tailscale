@@ -11,14 +11,14 @@ RUN go install tailscale.com/cmd/tailscale@v${VERSION} && \
 FROM balenalib/${BALENA_ARCH}-alpine:3.15-run
 
 # hadolint ignore=DL3018
-RUN apk --no-cache add tini iptables
+RUN apk --no-cache add tini iptables supervisor
 
 COPY --from=gobuild /go/bin /usr/bin
-COPY entrypoint.sh /init
+COPY supervisord.conf init.sh /
 
-RUN chmod +x /init
+RUN chmod +x /init.sh
 
 # ENV ADVERTISE_TAGS "tag:docker,tag:balena"
 ENV ADVERTISE_ROUTES 10.0.0.0/24,192.168.1.0/24
 
-ENTRYPOINT ["/sbin/tini", "--", "/init"]
+ENTRYPOINT ["/sbin/tini", "--", "/init.sh"]
