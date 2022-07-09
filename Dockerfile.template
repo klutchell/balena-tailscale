@@ -18,7 +18,9 @@ COPY entrypoint.sh /init
 
 RUN chmod +x /init
 
-# ENV ADVERTISE_TAGS "tag:docker,tag:balena"
-ENV ADVERTISE_ROUTES 10.0.0.0/24,192.168.1.0/24
+ENV TAILSCALE_UP_FLAGS "\
+    --advertise-routes=192.168.1.0/24 \
+    --advertise-exit-node \
+"
 
 ENTRYPOINT ["/sbin/tini", "--", "/init"]
