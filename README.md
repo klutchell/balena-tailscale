@@ -24,14 +24,13 @@ Depending on your configuration, you may need to [enable subnet routes from the 
 
 ### Environment Variables
 
-| Name                 | Description                                                                                                                                          |
-| -------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `TZ`                 | The timezone in your location. Find a [list of all timezone values here](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones).              |
-| `TAILSCALE_AUTHKEY`  | Provide an [auth key](https://tailscale.com/kb/1085/auth-keys) to automatically authenticate the node as your user account.                          |
-| `TAILSCALE_HOSTNAME` | Provide a hostname to use for the device instead of the one provided by the OS. Defaults to the balena device name at init.                          |
-| `ADVERTISE_TAGS`     | Give tagged permissions to this device. You must be [listed in "TagOwners"](https://tailscale.com/kb/1018/acls#tag-owners) to be able to apply tags. |
-| `ADVERTISE_ROUTES`   | Expose physical [subnet routes](https://tailscale.com/kb/1019/subnets) to your entire Tailscale network. Defaults to `10.0.0.0/24,192.168.1.0/24`.   |
-| `SET_HOSTNAME`       | Set a custom device hostname on application start. Defaults to `tailscale`.                                                                          |
+| Name                 | Description                                                                                                                             |
+| -------------------- | --------------------------------------------------------------------------------------------------------------------------------------- |
+| `TZ`                 | The timezone in your location. Find a [list of all timezone values here](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones). |
+| `TAILSCALE_AUTHKEY`  | Provide an [auth key](https://tailscale.com/kb/1085/auth-keys) to automatically authenticate the node as your user account.             |
+| `TAILSCALE_HOSTNAME` | Provide a hostname to use for the device instead of the one provided by the OS. Defaults to the balena device name at init.             |
+| `TAILSCALE_UP_FLAGS` | Additional space-separated flags to pass to the [Tailscale up command](https://tailscale.com/kb/1080/cli/#up).                          |
+| `SET_HOSTNAME`       | Set a custom device hostname on application start. Defaults to `tailscale`.                                                             |
 
 ## Contributing
 

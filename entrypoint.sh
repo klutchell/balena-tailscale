@@ -19,13 +19,11 @@ tailscaled &
 
 sleep 5
 
-# https://tailscale.com/kb/1019/subnets/
+# https://tailscale.com/kb/1080/cli/#up
+# shellcheck disable=SC2086
 tailscale up \
     -authkey "${TAILSCALE_AUTHKEY}" \
     -hostname "${TAILSCALE_HOSTNAME}" \
-    -advertise-tags "${ADVERTISE_TAGS}" \
-    -advertise-routes "${ADVERTISE_ROUTES}" "$@"
-
-# iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
+    ${TAILSCALE_UP_FLAGS}
 
 fg
