@@ -1,9 +1,9 @@
 ARG BALENA_ARCH=%%BALENA_ARCH%%
-FROM balenalib/${BALENA_ARCH}-alpine-golang:1.18-3.15-build AS gobuild
+FROM balenalib/${BALENA_ARCH}-alpine-golang:1.19-3.15-build AS gobuild
 
 WORKDIR /go/src
 
-ARG VERSION=1.26.1
+ARG VERSION=1.32.1
 
 RUN go install tailscale.com/cmd/tailscale@v${VERSION} && \
     go install tailscale.com/cmd/tailscaled@v${VERSION}
