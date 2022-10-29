@@ -20,13 +20,3 @@ services:
     cap_add:
       - net_admin
       - sys_module
-
-  hostname:
-    build:
-      context: hostname
-      dockerfile: Dockerfile.template
-    restart: no
-    labels:
-      io.balena.features.supervisor-api: 1
-    environment:
-      SET_HOSTNAME: tailscale
