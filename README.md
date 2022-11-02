@@ -1,6 +1,6 @@
 # balena-tailscale
 
-Run a [Tailscale](https://tailscale.com/) [subnet router](https://tailscale.com/kb/1019/subnets/) on balena!
+Add your device to your [Tailscale](https://tailscale.com/) network with this block!
 
 ## Usage
 
