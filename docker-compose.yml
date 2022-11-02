@@ -7,7 +7,7 @@ services:
   tailscale:
     build:
       context: .
-      dockerfile: Dockerfile.template
+      dockerfile: Dockerfile
     network_mode: host
     volumes:
       - state:/var/lib/tailscale
