@@ -16,7 +16,7 @@
   ],
   "regexManagers": [
     {
-      "fileMatch": ["(^|/)Dockerfile.template$"],
+      "fileMatch": ["(^|/)Dockerfile$"],
       "matchStrings": ["ARG VERSION=(?<currentValue>.*?)\\n"],
       "depNameTemplate": "tailscale/tailscale",
       "datasourceTemplate": "github-tags"

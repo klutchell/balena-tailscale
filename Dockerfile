@@ -1,5 +1,4 @@
-ARG BALENA_ARCH=%%BALENA_ARCH%%
-FROM balenalib/${BALENA_ARCH}-alpine-golang:1.19-3.15-build AS gobuild
+FROM golang:1.19.3-alpine3.16 AS gobuild
 
 WORKDIR /go/src
 
@@ -8,10 +7,10 @@ ARG VERSION=1.32.1
 RUN go install tailscale.com/cmd/tailscale@v${VERSION} && \
     go install tailscale.com/cmd/tailscaled@v${VERSION}
 
-FROM balenalib/${BALENA_ARCH}-alpine:3.15-run
+FROM alpine:3.16
 
 # hadolint ignore=DL3018
-RUN apk --no-cache add tini iptables
+RUN apk --no-cache add tini iptables bash
 
 COPY --from=gobuild /go/bin /usr/bin
 COPY entrypoint.sh /init
