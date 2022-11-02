@@ -2,6 +2,9 @@ FROM golang:1.19.3-alpine3.16 AS gobuild
 
 WORKDIR /go/src
 
+# hadolint ignore=DL3018
+RUN apk --no-cache add git
+
 ARG VERSION=1.32.1
 
 RUN go install tailscale.com/cmd/tailscale@v${VERSION} && \
