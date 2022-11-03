@@ -12,7 +12,13 @@ jobs:
     strategy:
       fail-fast: true
       matrix:
-        fleet: [gh_klutchell/tailscale-aarch64, gh_klutchell/tailscale-amd64, gh_klutchell/tailscale-armv7hf]
+        fleet:
+          [
+            gh_klutchell/tailscale-aarch64,
+            gh_klutchell/tailscale-amd64,
+            gh_klutchell/tailscale-armv7hf,
+            gh_klutchell/tailscale-fleet-aarch64,
+          ]
 
     steps:
       - uses: actions/checkout@v3
