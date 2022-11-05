@@ -22,6 +22,7 @@ RUN chmod +x /init
 
 ENV TAILSCALE_UP_FLAGS "\
     --advertise-exit-node \
+    --reset \
 "
 
 ENTRYPOINT ["/sbin/tini", "--", "/init"]
