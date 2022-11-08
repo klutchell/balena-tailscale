@@ -21,7 +21,6 @@ COPY entrypoint.sh /init
 RUN chmod +x /init
 
 ENV TAILSCALE_UP_FLAGS "\
-    --advertise-exit-node \
     --reset \
 "
 
