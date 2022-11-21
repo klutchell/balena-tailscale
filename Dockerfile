@@ -10,7 +10,7 @@ ARG VERSION=v1.32.3
 RUN go install tailscale.com/cmd/tailscale@${VERSION} && \
     go install tailscale.com/cmd/tailscaled@${VERSION}
 
-FROM alpine:3.16
+FROM alpine:3.17
 
 # hadolint ignore=DL3018
 RUN apk --no-cache add tini iptables bash
