@@ -5,7 +5,7 @@ WORKDIR /go/src
 # hadolint ignore=DL3018
 RUN apk --no-cache add git
 
-ARG VERSION=v1.34.0
+ARG VERSION=v1.34.1
 
 RUN go install tailscale.com/cmd/tailscale@${VERSION} && \
     go install tailscale.com/cmd/tailscaled@${VERSION}

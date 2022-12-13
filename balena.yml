@@ -1,6 +1,6 @@
 name: tailscale
 description: Run a Tailscale subnet router on balena!
-version: 1.34.0
+version: 1.34.1
 type: sw.block
 assets:
   repository:
