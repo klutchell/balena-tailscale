@@ -12,8 +12,6 @@ assets:
     data:
       url: https://raw.githubusercontent.com/klutchell/balena-tailscale/main/logo.png
 data:
-  applicationEnvironmentVariables:
-    - TAILSCALE_AUTHKEY: change_me
   defaultDeviceType: raspberrypi3
   supportedDeviceTypes:
     - raspberrypi3
