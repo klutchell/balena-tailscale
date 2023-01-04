@@ -23,11 +23,12 @@ services:
       - net.ipv4.conf.all.src_valid_mark=1
       - net.ipv4.ip_forward=1
       - net.ipv6.conf.all.forwarding=1
-    labels:
-      - io.balena.features.kernel-modules=1
     cap_add:
       - net_admin
-      - sys_module
+      - net_raw
+    tmpfs:
+      - /tmp
+      - /var/run/
 ```
 
 To pin to a specific version of this block use:
