@@ -1,4 +1,4 @@
-FROM tailscale/tailscale:v1.34.1
+FROM tailscale/tailscale:v1.34.2
 
 COPY entrypoint.sh /entrypoint.sh
 
