@@ -1,27 +1,11 @@
-FROM golang:1.19.4-alpine3.16 AS gobuild
+FROM tailscale/tailscale:v1.34.1
 
-WORKDIR /go/src
+COPY entrypoint.sh /entrypoint.sh
 
-# hadolint ignore=DL3018
-RUN apk --no-cache add git
+RUN chmod +x entrypoint.sh
 
-ARG VERSION=v1.34.1
+CMD ["/entrypoint.sh"]
 
-RUN go install tailscale.com/cmd/tailscale@${VERSION} && \
-    go install tailscale.com/cmd/tailscaled@${VERSION}
-
-FROM alpine:3.17
-
-# hadolint ignore=DL3018
-RUN apk --no-cache add tini iptables bash
-
-COPY --from=gobuild /go/bin /usr/bin
-COPY entrypoint.sh /init
-
-RUN chmod +x /init
-
-ENV TAILSCALE_UP_FLAGS "\
-    --reset \
-"
-
-ENTRYPOINT ["/sbin/tini", "--", "/init"]
+ENV TS_STATE_DIR "/var/lib/tailscale"
+ENV TS_SOCKET "/var/run/tailscale/tailscaled.sock"
+ENV TS_EXTRA_ARGS "--reset"
