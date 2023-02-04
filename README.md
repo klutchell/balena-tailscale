@@ -17,6 +17,7 @@ services:
     # where <arch> is one of aarch64, armv7hf or amd64
     image: bh.cr/klutchell_blocks/tailscale-<arch>
     network_mode: host
+    restart: on-failure
     volumes:
       - state:/var/lib/tailscale
     labels:
@@ -39,6 +40,7 @@ services:
     # where <version> is the release semver or release commit ID
     image: bh.cr/klutchell_blocks/tailscale-<arch>/<version>
     network_mode: host
+    restart: on-failure
     volumes:
       - state:/var/lib/tailscale
     labels:
