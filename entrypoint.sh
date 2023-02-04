@@ -3,6 +3,12 @@
 # exit on any error
 set -e
 
+if [ "${REQUIRE_AUTH_KEY}" = "true" ] && [ -z "${TS_AUTH_KEY}" ]
+then
+    echo "TS_AUTH_KEY is required"
+    exit 0
+fi
+
 # load the kernel module if it exists
 if modprobe wireguard 2>/dev/null
 then
