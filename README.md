@@ -15,7 +15,7 @@ services:
   ...
   tailscale:
     # where <arch> is one of aarch64, armv7hf or amd64
-    image: bh.cr/gh_klutchell/tailscale-<arch>
+    image: bh.cr/klutchell_blocks/tailscale-<arch>
     network_mode: host
     volumes:
       - state:/var/lib/tailscale
@@ -38,7 +38,7 @@ services:
   ...
   tailscale:
     # where <version> is the release semver or release commit ID
-    image: bh.cr/gh_klutchell/tailscale-<arch>/<version>
+    image: bh.cr/klutchell_blocks/tailscale-<arch>/<version>
     ...
 ```
 
