@@ -15,17 +15,16 @@ services:
   ...
   tailscale:
     # where <arch> is one of aarch64, armv7hf or amd64
-    image: bh.cr/gh_klutchell/tailscale-<arch>
+    image: bh.cr/klutchell_blocks/tailscale-<arch>
     network_mode: host
     volumes:
       - state:/var/lib/tailscale
-    sysctls:
-      - net.ipv4.conf.all.src_valid_mark=1
-      - net.ipv4.ip_forward=1
-      - net.ipv6.conf.all.forwarding=1
+    labels:
+      - io.balena.features.kernel-modules=1
     cap_add:
       - net_admin
       - net_raw
+      - sys_module
     tmpfs:
       - /tmp
       - /var/run/
@@ -38,8 +37,19 @@ services:
   ...
   tailscale:
     # where <version> is the release semver or release commit ID
-    image: bh.cr/gh_klutchell/tailscale-<arch>/<version>
-    ...
+    image: bh.cr/klutchell_blocks/tailscale-<arch>/<version>
+    network_mode: host
+    volumes:
+      - state:/var/lib/tailscale
+    labels:
+      - io.balena.features.kernel-modules=1
+    cap_add:
+      - net_admin
+      - net_raw
+      - sys_module
+    tmpfs:
+      - /tmp
+      - /var/run/
 ```
 
 ## Customization
