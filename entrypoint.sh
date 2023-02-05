@@ -13,6 +13,7 @@ fi
 if modprobe wireguard 2>/dev/null
 then
     dmesg | grep wireguard
+    export TS_USERSPACE="false"
 fi
 
 mkdir -p /dev/net
