@@ -12,7 +12,8 @@ fi
 # load the kernel module if it exists
 if modprobe wireguard 2>/dev/null
 then
-    dmesg | grep wireguard
+    modinfo wireguard || true
+    dmesg | grep wireguard || true
     export TS_USERSPACE="${TS_USERSPACE:-false}"
 fi
 
