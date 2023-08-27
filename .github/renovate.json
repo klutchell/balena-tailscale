@@ -1,19 +1,27 @@
 {
-  "extends": ["config:base"],
+  "extends": [
+    "config:recommended"
+  ],
   "packageRules": [
     {
-      "matchPackageNames": ["tailscale/tailscale"],
-      "matchBaseBranches": ["main"],
+      "matchPackageNames": [
+        "tailscale/tailscale"
+      ],
+      "matchBaseBranches": [
+        "main"
+      ],
       "matchUpdateTypes": [
-          "major",
-          "minor",
-          "patch"
+        "major",
+        "minor",
+        "patch"
       ],
       "postUpgradeTasks": {
         "commands": [
           "sed \"s|^version: .*$|version: $(npx -q -y -- semver -c -l {{{newVersion}}})|\" -i balena.yml"
         ],
-        "fileFilters": ["balena.yml"],
+        "fileFilters": [
+          "balena.yml"
+        ],
         "executionMode": "update"
       },
       "automerge": false
