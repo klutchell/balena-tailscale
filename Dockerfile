@@ -1,4 +1,4 @@
-FROM tailscale/tailscale:v1.54.0@sha256:251dde158fb12da8b57dfbbc702eee42bbc4c4cb09c4c898bceef43cd421c6ac
+FROM tailscale/tailscale:v1.56.0@sha256:ed1f9317d0bab2bc17f6eecc29401479b91c938df48c28b1bd3d3014eba9d013
 
 COPY entrypoint.sh /entrypoint.sh
 
