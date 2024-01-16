@@ -6,13 +6,13 @@ assets:
   repository:
     type: blob.asset
     data:
-      url: 'https://github.com/klutchell/balena-tailscale'
+      url: "https://github.com/sundaycarwash/balena-tailscale"
   logo:
     type: blob.asset
     data:
-      url: https://raw.githubusercontent.com/klutchell/balena-tailscale/main/logo.png
+      url: https://raw.githubusercontent.com/sundaycarwash/balena-tailscale/main/logo.png
 data:
-  defaultDeviceType: raspberrypi3
+  defaultDeviceType: raspberrypi4-64
   supportedDeviceTypes:
     - raspberrypi3
     - raspberrypi3-64
