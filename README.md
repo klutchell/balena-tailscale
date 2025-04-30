@@ -75,7 +75,7 @@ COPY serve.json /config/serve.json
 # Accepts a JSON file to programmatically configure Serve and Funnel functionality.
 # Use tailscale serve status --json to export your current configuration in the correct format.
 # https://tailscale.com/kb/1282/docker#ts_serve_config
-ENV TS_SERVE_CONFIG "/config/serve.json"
+ENV TS_SERVE_CONFIG="/config/serve.json"
 ```
 
 ## Contributing
