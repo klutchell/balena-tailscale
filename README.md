@@ -9,7 +9,7 @@ To use this block, add a service in your `docker-compose.yml` file as shown belo
 ```yml
 volumes:
   ...
-  state: {}
+  ts-state: {}
 
 services:
   ...
@@ -19,12 +19,11 @@ services:
     network_mode: host
     restart: on-failure
     volumes:
-      - state:/var/lib/tailscale
+      - ts-state:/var/lib/tailscale
     labels:
       - io.balena.features.kernel-modules=1
     cap_add:
       - net_admin
-      - net_raw
       - sys_module
     tmpfs:
       - /tmp
@@ -42,12 +41,11 @@ services:
     network_mode: host
     restart: on-failure
     volumes:
-      - state:/var/lib/tailscale
+      - ts-state:/var/lib/tailscale
     labels:
       - io.balena.features.kernel-modules=1
     cap_add:
       - net_admin
-      - net_raw
       - sys_module
     tmpfs:
       - /tmp
@@ -58,22 +56,8 @@ services:
 
 ### Environment Variables
 
-The supported environment variables are listed on the [official DockerHub repo](https://hub.docker.com/r/tailscale/tailscale).
-
-- `TS_AUTH_KEY`: The [authkey]((https://tailscale.com/kb/1085/auth-keys/)) to use for login.
-- `TS_KUBE_SECRET`: The name of the Kubernetes secret in which to store tailscaled state.
-- `TS_DEST_IP`: Proxy all incoming Tailscale traffic to the given destination.
-- `TS_ROUTES`: Subnet routes to advertise.
-- `TS_ACCEPT_DNS`: Whether to use the tailnet's DNS configuration.
-- `TS_SOCKET`: The path where the tailscaled LocalAPI socket should be created.
-- `TS_EXTRA_ARGS`: Extra arguments to 'tailscale up'.
-- `TS_USERSPACE`: Run with userspace networking (the default) instead of kernel networking.
-- `TS_STATE_DIR`: The directory in which to store tailscaled state. The data should persist across container restarts.
-- `TS_SOCKS5_SERVER`: The address on which to listen for SOCKS5 proxying into the tailnet.
-- `TS_OUTBOUND_HTTP_PROXY_LISTEN`: The address on which to listen for HTTP proxying into the tailnet.
-- `TS_TAILSCALED_EXTRA_ARGS`: Extra arguments to 'tailscaled'.
-
-For reference, see also the [documentation on Tailscale CLI commands](https://tailscale.com/kb/1080/cli/).
+The supported environment variables are detailed on the [official DockerHub repo](https://hub.docker.com/r/tailscale/tailscale)
+and on the [Using Tailscale with Docker KB](https://tailscale.com/kb/1282/docker).
 
 ## Contributing
 

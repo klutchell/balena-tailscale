@@ -1,7 +1,7 @@
 version: "2.1"
 
 volumes:
-  state: {}
+  ts-state: {}
 
 services:
   tailscale:
@@ -11,12 +11,11 @@ services:
     network_mode: host
     restart: on-failure
     volumes:
-      - state:/var/lib/tailscale
+      - ts-state:/var/lib/tailscale
     labels:
       - io.balena.features.kernel-modules=1
     cap_add:
       - net_admin
-      - net_raw
       - sys_module
     tmpfs:
       - /tmp

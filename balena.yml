@@ -18,5 +18,6 @@ data:
     - raspberrypi3
     - raspberrypi3-64
     - raspberrypi4-64
-    - fincm3
     - intel-nuc
+    - generic-amd64
+    - generic-aarch64
