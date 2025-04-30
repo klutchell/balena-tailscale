@@ -1,10 +1,12 @@
 # balena-tailscale
 
-Add your device to your [Tailscale](https://tailscale.com/) network with this block!
+Add your device to your [Tailscale](https://tailscale.com/) network with this
+block!
 
 ## Usage
 
-To use this block, add a service in your `docker-compose.yml` file as shown below.
+To use this block, add a service in your `docker-compose.yml` file as shown
+below.
 
 ```yml
 volumes:
@@ -56,18 +58,37 @@ services:
 
 ### Environment Variables
 
-The supported environment variables are detailed on the [official DockerHub repo](https://hub.docker.com/r/tailscale/tailscale)
-and on the [Using Tailscale with Docker KB](https://tailscale.com/kb/1282/docker).
+The supported environment variables are detailed on the
+[official DockerHub repo](https://hub.docker.com/r/tailscale/tailscale) and on
+the [Using Tailscale with Docker KB](https://tailscale.com/kb/1282/docker).
+
+### Serve Config
+
+To expose services via [Tailscale Serve](https://tailscale.com/kb/1312/serve) or
+[Tailscale Funnel](https://tailscale.com/kb/1223/funnel), you can load a custom
+`serve.json` file.
+
+```Dockerfile
+FROM bh.cr/klutchell_blocks/tailscale-aarch64
+
+WORKDIR /config
+COPY serve.json ./
+
+# Accepts a JSON file to programmatically configure Serve and Funnel functionality.
+# Use tailscale serve status --json to export your current configuration in the correct format.
+# https://tailscale.com/kb/1282/docker#ts_serve_config
+ENV TS_SERVE_CONFIG "/config/serve.json"
+```
 
 ## Contributing
 
-Please open an issue or submit a pull request with any features, fixes, or changes.
+Please open an issue or submit a pull request with any features, fixes, or
+changes.
 
 ## Acknowledgements
 
-[Tailscale](https://tailscale.com/) is primarily developed by the
-people at <https://github.com/orgs/tailscale/people>.
-For other contributors, see:
+[Tailscale](https://tailscale.com/) is primarily developed by the people at
+<https://github.com/orgs/tailscale/people>. For other contributors, see:
 
 - <https://github.com/tailscale/tailscale/graphs/contributors>
 - <https://github.com/tailscale/tailscale-android/graphs/contributors>
