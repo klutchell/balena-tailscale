@@ -1,4 +1,4 @@
-# based on https://github.com/tailscale/tailscale/blob/main/Dockerfile
+# Based on https://github.com/tailscale/tailscale/blob/main/Dockerfile
 FROM golang:1.24-alpine AS build-env
 
 WORKDIR /go/src/tailscale
@@ -38,16 +38,27 @@ RUN VERSION_SHORT=$(git describe --tags --abbrev=0 | sed 's/^v//') && \
 
 # https://hub.docker.com/r/tailscale/tailscale
 # https://github.com/tailscale/tailscale
-FROM tailscale/tailscale:v1.82.0@sha256:d26fc9bb035b0559900cc6f23506f6b1ddab61a690ffab4f5d84feceb3de811e
+# FROM tailscale/tailscale:v1.82.0@sha256:d26fc9bb035b0559900cc6f23506f6b1ddab61a690ffab4f5d84feceb3de811e
 
+# Start from alpine base since we aren't using the binaries from the tailscale image
+FROM alpine:3.19
+
+# hadolint ignore=DL3018
+RUN apk add --no-cache ca-certificates iptables iproute2 ip6tables
+
+# Alpine 3.19 replaces legacy iptables with nftables based implementation.  We
+# can't be certain that all hosts that run Tailscale containers currently
+# suppport nftables, so link back to legacy for backwards compatibility reasons.
+RUN rm /sbin/iptables && ln -s /sbin/iptables-legacy /sbin/iptables
+RUN rm /sbin/ip6tables && ln -s /sbin/ip6tables-legacy /sbin/ip6tables
+
+# Copy the built binaries from the build stage
 COPY --from=build-env /go/bin/* /usr/local/bin/
-
 RUN tailscale version
 
+# Setup our entrypoint
 COPY entrypoint.sh /entrypoint.sh
-
 RUN chmod +x entrypoint.sh
-
 CMD ["/entrypoint.sh"]
 
 # Directory where the state of tailscaled is stored.
