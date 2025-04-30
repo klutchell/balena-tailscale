@@ -25,8 +25,6 @@ ENV TS_AUTH_ONCE "false"
 
 # Accepts a JSON file to programmatically configure Serve and Funnel functionality.
 # Use tailscale serve status --json to export your current configuration in the correct format.
-# If this file is bind mounted using a Docker volume, it must be done so as a directory and
-# not an individual file for configuration updates to be correctly detected.
 # https://tailscale.com/kb/1282/docker#ts_serve_config
 # ENV TS_SERVE_CONFIG "/config/serve.json"
 
