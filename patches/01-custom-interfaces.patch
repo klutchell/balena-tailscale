@@ -1,0 +1,54 @@
+# https://github.com/tailscale/tailscale/compare/main...fd:tailscale:patches
+# https://github.com/tailscale/tailscale/commit/8058c130da37a2d51aae56650f11f1f8e1ec053c
+From 8058c130da37a2d51aae56650f11f1f8e1ec053c Mon Sep 17 00:00:00 2001
+From: Simon Menke <simon.menke@gmail.com>
+Date: Tue, 23 Jan 2024 20:01:51 +0100
+Subject: [PATCH] Applied patch
+
+---
+ net/netmon/state.go | 24 +++++++++++++++++++++---
+ 1 file changed, 21 insertions(+), 3 deletions(-)
+
+diff --git a/net/netmon/state.go b/net/netmon/state.go
+index 55aef478bfabb..98c408d36bf07 100644
+--- a/net/netmon/state.go
++++ b/net/netmon/state.go
+@@ -10,6 +10,7 @@ import (
+ 	"net"
+ 	"net/http"
+ 	"net/netip"
++	"os"
+ 	"runtime"
+ 	"slices"
+ 	"sort"
+@@ -699,10 +700,27 @@ func netInterfaces() ([]Interface, error) {
+ 		return nil, err
+ 	}
+ 	ret := make([]Interface, len(ifs))
+-	for i := range ifs {
+-		ret[i].Interface = &ifs[i]
++
++	excluded := strings.Fields(os.Getenv("TS_EXCLUDED_INTERFACES"))
++	allowed := strings.Fields(os.Getenv("TS_ALLOWED_INTERFACES"))
++
++	i := 0
++	for n := range ifs {
++		if slices.Contains(excluded, ifs[n].Name) {
++			continue
++		}
++		if len(allowed) > 0 {
++			if slices.Contains(allowed, ifs[n].Name) {
++				ret[i].Interface = &ifs[n]
++				i += 1
++			}
++		} else {
++			ret[i].Interface = &ifs[n]
++			i += 1
++		}
+ 	}
+-	return ret, nil
++
++	return ret[:i], nil
+ }
+ 
+ // DefaultRouteDetails are the details about a default route returned

@@ -17,6 +17,14 @@ RUN git clone --depth 1 -c advice.detachedHead=false \
 # hadolint ignore=DL3059
 RUN go mod download
 
+# Copy patches
+COPY patches/*.patch /patches/
+
+# Apply patches if they exist
+RUN for patch in /patches/*.patch; do \
+        [ -f "$patch" ] && git apply --verbose "$patch"; \
+    done
+
 SHELL ["/bin/ash", "-eo", "pipefail", "-c"]
 
 RUN VERSION_SHORT=$(git describe --tags --abbrev=0 | sed 's/^v//') && \
@@ -53,6 +61,10 @@ ENV TS_STATE_DIR="/var/lib/tailscale"
 # The default is /var/run/tailscale/tailscaled.sock. This is equivalent to tailscaled tailscale --socket=.
 # https://tailscale.com/kb/1282/docker#ts_socket
 ENV TS_SOCKET="/var/run/tailscale/tailscaled.sock"
+
+# Exclude resin-vpn and resin-dns interfaces from Tailscale interface selection.
+# See https://github.com/tailscale/tailscale/issues/1552#issuecomment-2177995310
+ENV TS_EXCLUDED_INTERFACES="resin-vpn resin-dns"
 
 # Attempt to log in only if not already logged in.
 # False by default, to forcibly log in every time the container starts.
