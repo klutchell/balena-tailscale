@@ -17,7 +17,7 @@ services:
   ...
   tailscale:
     # where <arch> is one of aarch64, armv7hf or amd64
-    image: bh.cr/klutchell_blocks/tailscale-<arch>
+    image: bh.cr/gh_klutchell/tailscale-<arch>
     network_mode: host
     restart: on-failure
     volumes:
@@ -39,7 +39,7 @@ services:
   ...
   tailscale:
     # where <version> is the release semver or release commit ID
-    image: bh.cr/klutchell_blocks/tailscale-<arch>/<version>
+    image: bh.cr/gh_klutchell/tailscale-<arch>/<version>
     network_mode: host
     restart: on-failure
     volumes:
@@ -69,11 +69,9 @@ To expose services via [Tailscale Serve](https://tailscale.com/kb/1312/serve) or
 `serve.json` file.
 
 ```Dockerfile
-FROM bh.cr/klutchell_blocks/tailscale-aarch64
+FROM bh.cr/gh_klutchell/tailscale-aarch64
 
-WORKDIR /config
-COPY serve.json ./
-
+COPY serve.json /config/serve.json
 # Accepts a JSON file to programmatically configure Serve and Funnel functionality.
 # Use tailscale serve status --json to export your current configuration in the correct format.
 # https://tailscale.com/kb/1282/docker#ts_serve_config

@@ -1,5 +1,14 @@
 #!/usr/bin/env sh
 
+# https://tailscale.com/kb/1282/docker
+# https://tailscale.com/kb/1278/tailscaled
+# https://tailscale.com/kb/1241/tailscale-up
+# https://tailscale.com/kb/1312/serve
+# https://tailscale.com/kb/1223/funnel
+# https://tailscale.com/kb/1242/tailscale-serve
+# https://tailscale.com/kb/1311/tailscale-funnel
+# https://tailscale.com/blog/docker-tailscale-guide
+
 set -eu
 
 truthy() {
