@@ -6,6 +6,9 @@ on:
     branches:
       - main
 
+permissions:
+  contents: write
+
 jobs:
   deploy:
     runs-on: ubuntu-24.04
@@ -25,9 +28,42 @@ jobs:
         with:
           persist-credentials: false
           fetch-depth: 1
+
       # https://github.com/balena-io/deploy-to-balena-action
       - uses: balena-io/deploy-to-balena-action@a4eb179bbb33c30c348c2840b35c048819a188bd # v2.0.111
+        id: deploy
         with:
           balena_token: ${{ secrets.BALENA_API_KEY }}
           fleet: ${{ matrix.fleet }}
-          create_tag: true
+          # create_tag: true
+
+      # https://github.com/actions/github-script
+      - uses: actions/github-script@v7.0.1
+        # if: steps.deploy.outputs.version != '' && github.event.pull_request.merged
+        env:
+          # REF: refs/tags/${{ steps.deploy.outputs.version }}
+          # Hardcode an existing ref to test the step failure
+          REF: refs/tags/1.82.5+rev1
+          SHA: ${{ github.event.pull_request.head.sha }}
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          result-encoding: json
+          script: |
+            core.info(`Creating reference ${process.env.REF}`);
+
+            try {
+              const { data: ref } = await github.rest.git.createRef({
+                ...context.repo,
+                ref: process.env.REF,
+                sha: process.env.SHA
+              });
+              return ref;
+            } catch (error) {
+              console.error(JSON.stringify(error, null, 2));
+              if (error.message !== 'Reference already exists') {
+                core.setFailed(error.message);
+              } else {
+                core.info('Reference already exists');
+              }
+              return;
+            }
