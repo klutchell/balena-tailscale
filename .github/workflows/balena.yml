@@ -49,14 +49,22 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           result-encoding: json
           script: |
-            core.info(`Creating reference ${process.env.REF}`);
+            
+            async function createRef(ref, sha) {
+              core.info(`Creating reference ${ref}`);
+              const { data: response } = await github.rest.git.createRef({
+                ...context.repo,
+                ref,
+                sha,
+              });
+              return response;
+            }
 
             try {
-              const { data: ref } = await github.rest.git.createRef({
-                ...context.repo,
-                ref: process.env.REF,
-                sha: process.env.SHA
-              });
+              const ref = await createRef(
+                process.env.REF,
+                process.env.SHA
+              );
               return ref;
             } catch (error) {
               console.error(JSON.stringify(error, null, 2));
