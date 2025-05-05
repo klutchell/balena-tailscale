@@ -49,8 +49,8 @@ RUN apk add --no-cache ca-certificates iptables iproute2 ip6tables
 # Alpine 3.19 replaces legacy iptables with nftables based implementation.  We
 # can't be certain that all hosts that run Tailscale containers currently
 # suppport nftables, so link back to legacy for backwards compatibility reasons.
-RUN rm /sbin/iptables && ln -s /sbin/iptables-legacy /sbin/iptables
-RUN rm /sbin/ip6tables && ln -s /sbin/ip6tables-legacy /sbin/ip6tables
+RUN rm /usr/sbin/iptables && ln -s /usr/sbin/iptables-legacy /usr/sbin/iptables
+RUN rm /usr/sbin/ip6tables && ln -s /usr/sbin/ip6tables-legacy /usr/sbin/ip6tables
 
 # Copy the built binaries from the build stage
 COPY --from=build-env /go/bin/* /usr/local/bin/
