@@ -8,7 +8,7 @@ WORKDIR /go/src/tailscale
 RUN apk add --no-cache git
 
 # renovate: datasource=github-releases depName=tailscale/tailscale
-ARG TAILSCALE_VERSION=v1.84.0
+ARG TAILSCALE_VERSION=v1.84.1
 
 # Clone the Tailscale repository
 RUN git clone --depth 1 -c advice.detachedHead=false \
