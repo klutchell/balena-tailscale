@@ -1,7 +1,7 @@
 name: tailscale
 description: Run a Tailscale subnet router on balena!
 # renovate: datasource=github-releases depName=tailscale/tailscale
-version: 1.90.6
+version: 1.90.8
 type: sw.block
 assets:
   repository:
