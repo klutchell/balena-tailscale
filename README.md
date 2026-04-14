@@ -19,7 +19,7 @@ services:
     # where <arch> is one of aarch64, armv7hf or amd64
     image: bh.cr/gh_klutchell/tailscale-<arch>
     network_mode: host
-    restart: on-failure
+    restart: always
     volumes:
       - ts-state:/var/lib/tailscale
     labels:
