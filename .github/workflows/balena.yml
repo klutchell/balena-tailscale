@@ -26,7 +26,7 @@ jobs:
           persist-credentials: false
           fetch-depth: 1
       # https://github.com/balena-io/deploy-to-balena-action
-      - uses: balena-io/deploy-to-balena-action@a1ad4ddddc982b50533e86d3fdc4731c5184f497 # v2.2.3
+      - uses: balena-io/deploy-to-balena-action@41f725a4144f4e0da0a6160bcad0b88b4d5d90d1 # v2.2.4
         with:
           balena_token: ${{ secrets.BALENA_API_KEY }}
           fleet: ${{ matrix.fleet }}
