@@ -1,5 +1,5 @@
 # Based on https://github.com/tailscale/tailscale/blob/main/Dockerfile
-FROM golang:1.27-alpine@sha256:cf6fca6641884b8433441b2b0652976f975e1d0fdd26d177eaaf8596087f3125 AS build-env
+FROM golang:1.27-alpine@sha256:4cb7ac979db5fcc41cae44b2227ba5ab8a51e8807f40d9ba4dee20a0ad960b5b AS build-env
 
 WORKDIR /go/src/tailscale
 
@@ -41,7 +41,7 @@ RUN VERSION_SHORT=$(git describe --tags --abbrev=0 | sed 's/^v//') && \
 # FROM tailscale/tailscale:v1.82.0@sha256:d26fc9bb035b0559900cc6f23506f6b1ddab61a690ffab4f5d84feceb3de811e
 
 # Start from alpine base since we aren't using the binaries from the tailscale image
-FROM alpine:3.24@sha256:28bd5fe8b56d1bd048e5babf5b10710ebe0bae67db86916198a6eec434943f8b
+FROM alpine:3.24@sha256:294b683cb724975bec92580e1e685676bd4b50bda910ddb8c51d4cabeaec77e6
 
 # hadolint ignore=DL3018
 RUN apk add --no-cache ca-certificates iptables iproute2 ip6tables iptables-legacy
