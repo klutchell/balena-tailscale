@@ -41,7 +41,7 @@ RUN VERSION_SHORT=$(git describe --tags --abbrev=0 | sed 's/^v//') && \
 # FROM tailscale/tailscale:v1.82.0@sha256:d26fc9bb035b0559900cc6f23506f6b1ddab61a690ffab4f5d84feceb3de811e
 
 # Start from alpine base since we aren't using the binaries from the tailscale image
-FROM alpine:3.24@sha256:294b683cb724975bec92580e1e685676bd4b50bda910ddb8c51d4cabeaec77e6
+FROM alpine:3.24@sha256:c6b073f8e9e58d881f6ffba6ebf3b9ebd60b9e7d6e8337018c0e68bb5c356873
 
 # hadolint ignore=DL3018
 RUN apk add --no-cache ca-certificates iptables iproute2 ip6tables iptables-legacy
