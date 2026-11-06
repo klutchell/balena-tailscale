@@ -1,5 +1,5 @@
 # Based on https://github.com/tailscale/tailscale/blob/main/Dockerfile
-FROM golang:1.27-alpine@sha256:dbaa054703263d06c8b49576667418473b6231f8c0fa69dee103207fdb8e3654 AS build-env
+FROM golang:1.27-alpine@sha256:fa3d596898d9f126af7c01d14ee7597bab3f39cccf392ef36b69fe77cd681f18 AS build-env
 
 WORKDIR /go/src/tailscale
 
